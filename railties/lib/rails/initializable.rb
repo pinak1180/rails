@@ -56,6 +56,7 @@ module Rails
     def run_initializers(group = :default, *args)
       return if instance_variable_defined?(:@ran)
       initializers.tsort_each do |initializer|
+        puts "Initializer: #{initializer.name}"
         initializer.run(*args) if initializer.belongs_to?(group)
       end
       @ran = true
